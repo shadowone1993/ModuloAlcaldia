@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="internal_moves_view">
+                <field name="name">internal.moves.view</field>
+                <field name="model">stock.picking</field>
+                <field name="inherit_id" ref="stock.view_picking_form" />
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    
+                    <xpath expr="//field[@name='partner_id']" position="after">
+                         
+                         <field name="location_orig_id"/>
+                         <field name="location_desti_id"/>
+                    </xpath>
+
+                    <xpath expr="//field[@name='partner_id']" position="attributes"> 
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='move_lines']" position="attributes">
+                        <attribute name="context">{'address_in_id': partner_id, 'form_view_ref':'stock.view_move_picking_form', 'tree_view_ref':'stock.view_move_picking_tree', 'default_picking_type_id': picking_type_id,'default_picking_id': active_id,
+                        'default_location_id': location_orig_id, 'default_location_dest_id': location_desti_id}</attribute>
+                    </xpath>
+                </field>
+        </record>
+    </data>
+</openerp>
